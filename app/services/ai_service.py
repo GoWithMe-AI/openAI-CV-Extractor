@@ -61,8 +61,9 @@ class AIService:
                         "content": prompt
                     }
                 ],
-                response_format={"type": "json_object"},
-                temperature=0.3
+                response_format={"type": "json_object"}
+                # Note: temperature parameter removed - using model default
+                # Some models only support default temperature value
             )
             
             result_text = response.choices[0].message.content
@@ -71,20 +72,7 @@ class AIService:
         except ImportError:
             raise ValueError("openai package is required. Install it with: pip install openai")
         except Exception as e:
-            error_msg = str(e)
-            # Provide more specific error messages
-            if "Connection" in error_msg or "connect" in error_msg.lower():
-                raise ValueError(
-                    f"OpenAI API connection error: {error_msg}. "
-                    "Please check your internet connection, firewall settings, or try again later."
-                )
-            elif "api key" in error_msg.lower() or "authentication" in error_msg.lower():
-                raise ValueError(
-                    f"OpenAI API authentication error: {error_msg}. "
-                    "Please check your OPENAI_API_KEY in the .env file."
-                )
-            else:
-                raise ValueError(f"OpenAI API error: {error_msg}")
+            raise ValueError(f"OpenAI API error: {str(e)}")
     
     async def _summarize_with_gemini(self, cv_text: str) -> Dict[str, Any]:
         """Summarize using Google Gemini API."""
