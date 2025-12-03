@@ -1,4 +1,2 @@
-"""
-API route handlers.
-"""
+"""API route handlers."""
 

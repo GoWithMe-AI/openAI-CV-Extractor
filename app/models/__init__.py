@@ -1,4 +1,2 @@
-"""
-Data models for request/response schemas.
-"""
+"""Data models for request/response schemas."""
 

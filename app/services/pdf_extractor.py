@@ -2,7 +2,6 @@
 PDF text extraction service.
 """
 import io
-from typing import Optional
 import PyPDF2
 import pdfplumber
 

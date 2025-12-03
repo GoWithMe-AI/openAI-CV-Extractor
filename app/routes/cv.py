@@ -2,7 +2,6 @@
 CV processing routes.
 """
 from fastapi import APIRouter, UploadFile, File, HTTPException, status
-from fastapi.responses import JSONResponse
 from app.models.response import CVSummaryResponse, ErrorResponse
 from app.services.pdf_extractor import PDFExtractor
 from app.services.ai_service import AIService

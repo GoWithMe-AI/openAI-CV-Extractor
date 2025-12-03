@@ -1,9 +1,7 @@
 """
 Configuration management for the application.
 """
-import os
-from typing import Optional, List, Set
-from pydantic import field_validator
+from typing import Optional, Set
 from pydantic_settings import BaseSettings
 
 
