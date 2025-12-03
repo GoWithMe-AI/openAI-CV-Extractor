@@ -51,6 +51,8 @@ GEMINI_API_KEY=your_key_here
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+### 4. Deliverables
+
 ### cURL Example
 
 **Windows Command Prompt:**
