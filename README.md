@@ -51,44 +51,41 @@ GEMINI_API_KEY=your_key_here
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The API will be available at:
-- API: http://localhost:8000
-- Docs: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## API Usage
-
-### Endpoint
-
-**POST** `/api/v1/process-cv`
-
-Upload a PDF file to extract CV information.
-
 ### cURL Example
 
+**Basic command:**
 ```bash
 curl -X POST "http://localhost:8000/api/v1/process-cv" \
   -H "accept: application/json" \
-  -H "Content-Type: multipart/form-data" \
   -F "file=@/path/to/your/resume.pdf"
 ```
 
-### Response
+**How to set the file path:**
 
-```json
-{
-  "summary": "Experienced software engineer with 5 years in full-stack development...",
-  "skills": ["Python", "JavaScript", "React", "Node.js", "AWS", "Docker"],
-  "experience_years": 5.5
-}
+**Windows (PowerShell):**
+```bash
+curl -X POST "http://localhost:8000/api/v1/process-cv" `
+  -H "accept: application/json" `
+  -F "file=@C:\Users\YourName\Documents\resume.pdf"
 ```
 
-### Error Responses
+**Linux/Mac:**
+```bash
+curl -X POST "http://localhost:8000/api/v1/process-cv" \
+  -H "accept: application/json" \
+  -F "file=@/home/username/Documents/resume.pdf"
+```
 
-- **400 Bad Request**: Invalid file type, file too large, or extraction failed
-- **500 Internal Server Error**: AI processing error or server error
+**If the file is in the current directory:**
+```bash
+# Windows
+curl -X POST "http://localhost:8000/api/v1/process-cv" -H "accept: application/json" -F "file=@resume.pdf"
 
-## Postman Collection
+# Linux/Mac
+curl -X POST "http://localhost:8000/api/v1/process-cv" -H "accept: application/json" -F "file=@./resume.pdf"
+```
+
+### Postman Example
 
 Import `postman_collection.json` into Postman to test the API easily.
 
@@ -97,66 +94,6 @@ Import `postman_collection.json` into Postman to test the API easily.
 3. Select `postman_collection.json`
 4. Update the `file` parameter with your PDF file
 5. Send the request
-
-## Project Structure
-
-```
-CV-Extractor/
-├── app/
-│   ├── __init__.py
-│   ├── main.py              # FastAPI application
-│   ├── config.py            # Configuration management
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── response.py      # Response schemas
-│   ├── services/
-│   │   ├── __init__.py
-│   │   ├── pdf_extractor.py # PDF text extraction
-│   │   └── ai_service.py    # AI integration
-│   └── routes/
-│       ├── __init__.py
-│       └── cv.py            # CV processing routes
-├── requirements.txt
-├── .env.example
-├── postman_collection.json
-└── README.md
-```
-
-## Extending the Application
-
-### Add a New AI Provider
-
-1. Add provider configuration in `app/config.py`
-2. Implement provider method in `app/services/ai_service.py`
-3. Update `_validate_config()` and `summarize_cv()` methods
-
-### Add New Extraction Fields
-
-1. Update `CVSummaryResponse` model in `app/models/response.py`
-2. Modify the AI prompt in `app/services/ai_service.py`
-3. Update response parsing logic
-
-### Support Additional File Formats
-
-1. Add format handler in `app/services/pdf_extractor.py`
-2. Update `ALLOWED_EXTENSIONS` in `app/config.py`
-3. Add validation in route handler
-
-## Testing
-
-Test the API using:
-- **cURL**: See example above
-- **Postman**: Import `postman_collection.json`
-- **Swagger UI**: Visit http://localhost:8000/docs
-- **Python requests**:
-  ```python
-  import requests
-  
-  url = "http://localhost:8000/api/v1/process-cv"
-  files = {'file': open('resume.pdf', 'rb')}
-  response = requests.post(url, files=files)
-  print(response.json())
-  ```
 
 ## License
 
