@@ -53,36 +53,22 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ### cURL Example
 
-**Basic command:**
-```bash
-curl -X POST "http://localhost:8000/api/v1/process-cv" \
-  -H "accept: application/json" \
-  -F "file=@/path/to/your/resume.pdf"
+**Windows Command Prompt:**
+```cmd
+curl.exe --noproxy "*" -X POST "http://127.0.0.1:8000/api/v1/process-cv" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "file=@Senior Full Stack & AI Engineer.pdf;type=application/pdf"
 ```
 
-**How to set the file path:**
-
-**Windows (PowerShell):**
-```bash
-curl -X POST "http://localhost:8000/api/v1/process-cv" `
-  -H "accept: application/json" `
-  -F "file=@C:\Users\YourName\Documents\resume.pdf"
+**If file is in a different location (use full path like below):**
+```cmd
+curl.exe --noproxy "*" -X POST "http://127.0.0.1:8000/api/v1/process-cv" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "file=@C:\Users\Administrator\Music\openAI-CV-Extractor\Senior Full Stack & AI Engineer.pdf;type=application/pdf"
 ```
 
 **Linux/Mac:**
 ```bash
 curl -X POST "http://localhost:8000/api/v1/process-cv" \
   -H "accept: application/json" \
-  -F "file=@/home/username/Documents/resume.pdf"
-```
-
-**If the file is in the current directory:**
-```bash
-# Windows
-curl -X POST "http://localhost:8000/api/v1/process-cv" -H "accept: application/json" -F "file=@resume.pdf"
-
-# Linux/Mac
-curl -X POST "http://localhost:8000/api/v1/process-cv" -H "accept: application/json" -F "file=@./resume.pdf"
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@/path/to/your/resume.pdf;type=application/pdf"
 ```
 
 ### Postman Example
