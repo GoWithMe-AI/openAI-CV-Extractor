@@ -2,6 +2,10 @@
 
 A clean, extensible REST API for extracting and summarizing CV/resume information from PDF files using AI (OpenAI or Google Gemini).
 
+
+https://github.com/user-attachments/assets/553c8801-d2f6-4591-8227-ebdab2151d50
+
+
 ## Features
 
 - 📄 PDF text extraction
